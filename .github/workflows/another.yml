@@ -1,0 +1,9 @@
+name: A workflow for my Hello World file
+on: push
+  branches: [ not_a_branch ]
+jobs:
+  build:
+    name: Hello world action part deux
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Look at me fire!"
