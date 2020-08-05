@@ -1,4 +1,4 @@
-name: A workflow that triggers on comments
+name: A workflow that echos details of a trigger event
 on: 
   pull_request:
   issue_comment:
@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print details
-        run: echo "github.event_name = ${{ github.event_name }}\ngithub.ref = ${{ github.ref }}\n"
+        run: echo "github.event_name = ${{ github.event_name }} github.ref = ${{ github.ref }} github.sha = ${{ github.sha }}"
