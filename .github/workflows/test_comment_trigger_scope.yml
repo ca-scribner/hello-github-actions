@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print details
-        run: echo "github.event_name = {{ github.event_name }}\ngithub.ref = {{ github.ref }}\n
+        run: echo "github.event_name = {{ github.event_name }}\ngithub.ref = {{ github.ref }}\n"
