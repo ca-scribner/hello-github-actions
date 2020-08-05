@@ -51,7 +51,7 @@ jobs:
     steps:
 #     Turns out this action is named confusingly... should really be "detect if issue is a comment to PR".  
 #     pull_request is only returned true if both issue_comment AND it is on a pr
-    - uses: khan/pull-request-comment-trigger@v1.0.0
+    - uses: khan/pull-request-comment-trigger@1.0.0
       id: pr_comment_trigger
       with:
         trigger: /trigger
