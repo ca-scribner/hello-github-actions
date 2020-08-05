@@ -17,7 +17,7 @@ jobs:
   try_pr_number:
     runs-on: ubuntu-latest
     steps:
-    - uses: jmatsu/detect-issue-comment-to-pr-action:v1.0
+    - uses: jmatsu/detect-issue-comment-to-pr-action@v1.0
       id: pr_number
     - run: echo "I triggered on PR ${{ steps.filter.outputs.pull_number }}, or a comment to that PR"
       if: steps.filter.outputs.is_pull_request == 'true'
