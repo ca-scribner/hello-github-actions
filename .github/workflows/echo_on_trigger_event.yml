@@ -11,3 +11,5 @@ jobs:
     steps:
       - name: Print details
         run: echo "github.event_name = ${{ github.event_name }} github.ref = ${{ github.ref }} github.sha = ${{ github.sha }} github.event_path = ${{ github.event_path }}"
+      - name: Cat event path
+        run: cat ${{ github.event_path }}
