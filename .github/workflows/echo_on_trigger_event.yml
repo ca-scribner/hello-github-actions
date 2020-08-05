@@ -17,6 +17,8 @@ jobs:
   try_pr_number:
     runs-on: ubuntu-latest
     steps:
+#     Turns out this action is named confusingly... should really be "detect if issue is a comment to PR".  
+#     pull_request is only returned true if both issue_comment AND it is on a pr
     - uses: jmatsu/detect-issue-comment-to-pr-action@v1.0
       id: pr_number
     - run: echo "Previous event returned is_pull_request == ${{ steps.pr_number.outputs.is_pull_request }}, pull_number == ${{ steps.pr_number.outputs.pull_number }}"
@@ -37,5 +39,8 @@ jobs:
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
             --data '{ "body": "I triggered on PR ${{ steps.pr_number.outputs.pull_number }}, or a comment to that PR" }'
-
-      
+    - name: Test exit status
+      if: steps.pr_number.outputs.is_pull_request != 'true'
+      run: |
+        echo "That's not good"
+        exit 1      
