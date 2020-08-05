@@ -1,0 +1,10 @@
+name: A workflow that triggers on comments
+on: comment
+
+jobs:
+  build:
+    name: Hello world comment edition
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print details
+      - runs: echo "github.event_name = {{ github.event_name }}\ngithub.ref = {{ github.ref }}\n
