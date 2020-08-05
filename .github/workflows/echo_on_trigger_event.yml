@@ -14,7 +14,7 @@ jobs:
       - name: Cat event path
         run: cat ${{ github.event_path }}
 
-  try_pr_number:
+  get_pr_number_from_issue_comment:
     runs-on: ubuntu-latest
     steps:
 #     Turns out this action is named confusingly... should really be "detect if issue is a comment to PR".  
@@ -44,3 +44,19 @@ jobs:
       run: |
         echo "That's not good"
         exit 1      
+
+# This one needs a trigger keyword
+  get_pr_number_from_issue_comment_2:
+    runs-on: ubuntu-latest
+    steps:
+#     Turns out this action is named confusingly... should really be "detect if issue is a comment to PR".  
+#     pull_request is only returned true if both issue_comment AND it is on a pr
+    - uses: khan/pull-request-comment-trigger@v1.0.0
+      id: pr_comment_trigger
+      with:
+        trigger: /trigger
+        reaction: rocket
+      env: 
+        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+    - run: echo "Previous event returned triggered == ${{ steps.pr_comment_trigger.outputs.triggered }}, comment_body == ${{ steps.pr_comment_trigger.outputs.comment_body }}"
+
