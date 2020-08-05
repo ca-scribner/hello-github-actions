@@ -19,12 +19,13 @@ jobs:
     steps:
     - uses: jmatsu/detect-issue-comment-to-pr-action@v1.0
       id: pr_number
-    - run: echo "I triggered on PR ${{ steps.filter.outputs.pull_number }}, or a comment to that PR"
-      if: steps.filter.outputs.is_pull_request == 'true'
+    - run: echo "Previous event returned is_pull_request == ${{ steps.pr_number.outputs.is_pull_request }}, pull_number == ${{ steps.pr_number.outputs.pull_number }}"
+    - run: echo "I triggered on PR ${{ steps.pr_number.outputs.pull_number }}, or a comment to that PR"
+      if: steps.pr_number.outputs.is_pull_request == 'true'
     - run: echo "I'm not a pull request"
-      if: steps.filter.outputs.is_pull_request != 'true'
+      if: steps.pr_number.outputs.is_pull_request != 'true'
     - name: Add info back as a comment on PR
-      if: steps.filter.outputs.is_pull_request == 'true'
+      if: steps.pr_number.outputs.is_pull_request == 'true'
       env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -34,6 +35,6 @@ jobs:
             $URL \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            --data '{ "body": "I triggered on PR ${{ steps.filter.outputs.pull_number }}, or a comment to that PR" }'
+            --data '{ "body": "I triggered on PR ${{ steps.pr_number.outputs.pull_number }}, or a comment to that PR" }'
 
       
