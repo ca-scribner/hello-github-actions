@@ -1,0 +1,13 @@
+name: A workflow that triggers on comments
+on: 
+  pull_request:
+  issue_comment:
+      types: [created]
+
+jobs:
+  describe_event:
+    name: Describes some event variables
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print details
+        run: echo "github.event_name = ${{ github.event_name }}\ngithub.ref = ${{ github.ref }}\n"
